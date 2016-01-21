@@ -13,7 +13,7 @@ require('freedesktop.menu')
 freedesktop.utils.icon_theme = 'gnome'
 vicious = require("vicious")
 local wi = require("wi")
-terminal = "urxvt -fg orange -bg black"
+terminal = "urxvt -fg blue -bg gray"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 modkey = "Mod4"
@@ -59,8 +59,8 @@ local layouts =
 naughty.config.defaults.timeout = 5
 naughty.config.defaults.screen = 1
 naughty.config.defaults.position = "top_right"
-naughty.config.defaults.margin = 8
-naughty.config.defaults.gap = 1
+naughty.config.defaults.margin = 0
+naughty.config.defaults.gap = 0
 naughty.config.defaults.ontop = true
 naughty.config.defaults.font = "terminus 10"
 naughty.config.defaults.icon = nil
@@ -68,7 +68,7 @@ naughty.config.defaults.icon_size = 256
 naughty.config.defaults.fg = beautiful.fg_tooltip
 naughty.config.defaults.bg = beautiful.bg_tooltip
 naughty.config.defaults.border_color = beautiful.border_tooltip
-naughty.config.defaults.border_width = 2
+naughty.config.defaults.border_width = 0
 naughty.config.defaults.hover_timeout = nil
 -- }}}
 
@@ -206,35 +206,18 @@ for s = 1, screen.count() do
                            awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
     mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
-    mywibox[s] = awful.wibox({ position = "top", screen = s })
+    mywibox[s] = awful.wibox({ position = "bottom", screen = s })
 
     local left_layout = wibox.layout.fixed.horizontal()
     left_layout:add(mylauncher)
     left_layout:add(mytaglist[s])
     left_layout:add(mypromptbox[s])
-    left_layout:add(cpuicon)
-    left_layout:add(cpu)
-    left_layout:add(spacer)
-    left_layout:add(memicon)
-    left_layout:add(mem)
 
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(spacer)
-    right_layout:add(mailicon)
-    right_layout:add(mailwidget)
-    right_layout:add(spacer)
---    right_layout:add(baticon)
---    right_layout:add(batpct)
---    right_layout:add(spacer)
     right_layout:add(pacicon)
     right_layout:add(pacwidget)
-    right_layout:add(spacer)
-    right_layout:add(volicon)
-    right_layout:add(volpct)
-    right_layout:add(volspace)
-    right_layout:add(spacer)
-    right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
     local layout = wibox.layout.align.horizontal()
