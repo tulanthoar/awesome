@@ -13,7 +13,7 @@ require('freedesktop.menu')
 freedesktop.utils.icon_theme = 'gnome'
 vicious = require("vicious")
 local wi = require("wi")
-terminal = "urxvt -fg lightblue -bg gray20"
+terminal = "konsole"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 modkey = "Mod4"
